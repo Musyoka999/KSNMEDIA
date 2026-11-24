@@ -659,10 +659,15 @@
                     return;
                 }
 
-                bookingForm.reset();
-                bookingDate.min = kenyaToday;
-                bookingStatus.textContent = 'Your booking has been submitted successfully. It cannot be edited after submission.';
-                bookingStatus.className = 'text-center text-sm text-green-700';
+                bookingStatus.textContent = 'Your booking has been submitted successfully. Your details are now locked and cannot be changed.';
+bookingStatus.className = 'text-center text-sm text-green-700';
+
+// Lock all booking fields after successful submission.
+bookingForm.querySelectorAll('input, select, textarea, button').forEach((field) => {
+    field.disabled = true;
+});
+
+bookingSubmit.textContent = 'Booking Locked';
             } catch (error) {
                 console.error('Booking connection error:', error);
                 bookingStatus.textContent = 'Connection problem. Please check your internet and try again.';
