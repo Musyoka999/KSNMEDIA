@@ -91,6 +91,7 @@
                 <a href="#about" class="nav-link text-lg text-gray-600 hover:text-red-500 transition duration-300 rounded-lg p-2">About Us</a>
                 <a href="#connect" class="nav-link text-lg text-gray-600 hover:text-red-500 transition duration-300 rounded-lg p-2">Connect</a>
                 <a href="#contact" class="nav-link text-lg text-gray-600 hover:text-red-500 transition duration-300 rounded-lg p-2">Contact</a>
+                <a href="#booking" class="nav-link text-lg text-gray-600 hover:text-red-500 transition duration-300 rounded-lg p-2">Book Now</a>
             </nav>
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
@@ -110,6 +111,7 @@
                 <a href="#about" class="nav-link text-lg text-gray-600 hover:text-red-500 transition duration-300 rounded-lg p-2 w-full text-center">About Us</a>
                 <a href="#connect" class="nav-link text-lg text-gray-600 hover:text-red-500 transition duration-300 rounded-lg p-2 w-full text-center">Connect</a>
                 <a href="#contact" class="nav-link text-lg text-gray-600 hover:text-red-500 transition duration-300 rounded-lg p-2 w-full text-center">Contact</a>
+                <a href="#booking" class="nav-link text-lg text-gray-600 hover:text-red-500 transition duration-300 rounded-lg p-2 w-full text-center">Book Now</a>
             </nav>
         </div>
     </header>
@@ -282,6 +284,46 @@
         </div>
     </section>
 
+
+    <!-- Booking Section (added without changing the existing website sections) -->
+    <section id="booking" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-4 text-gray-900">Book Your Event</h2>
+            <p class="text-center text-lg text-gray-700 mb-10">Reserve KSN Media Co. for your special day. Please check your details carefully before submitting.</p>
+            <div class="max-w-3xl mx-auto bg-gray-50 rounded-xl shadow-lg p-8 border border-gray-100">
+                <form id="booking-form" class="space-y-6">
+                    <div>
+                        <label for="booking-date" class="block text-gray-800 text-lg font-semibold mb-2">Event Date</label>
+                        <input type="date" id="booking-date" name="event_date" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-300">
+                    </div>
+                    <div>
+                        <label for="booking-venue" class="block text-gray-800 text-lg font-semibold mb-2">Venue of the Event</label>
+                        <input type="text" id="booking-venue" name="venue" maxlength="200" required placeholder="Enter event venue" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-300">
+                    </div>
+                    <div>
+                        <label for="booking-client-name" class="block text-gray-800 text-lg font-semibold mb-2">Client's Full Name</label>
+                        <input type="text" id="booking-client-name" name="client_name" maxlength="120" autocomplete="name" required placeholder="Enter your full name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-300">
+                    </div>
+                    <div>
+                        <label for="booking-phone" class="block text-gray-800 text-lg font-semibold mb-2">Phone Number</label>
+                        <input type="tel" id="booking-phone" name="phone" maxlength="30" autocomplete="tel" required placeholder="e.g. 07XXXXXXXX" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-300">
+                    </div>
+                    <div>
+                        <label for="booking-email" class="block text-gray-800 text-lg font-semibold mb-2">Email Address <span class="font-normal text-gray-500">(Optional)</span></label>
+                        <input type="email" id="booking-email" name="email" maxlength="254" autocomplete="email" placeholder="you@example.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-300">
+                    </div>
+                    <div class="text-center">
+                        <button id="booking-submit" type="submit" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-10 rounded-full shadow-lg transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Submit Booking</button>
+                    </div>
+                    <p id="booking-status" class="text-center text-sm" role="status" aria-live="polite"></p>
+                    <p class="text-xs text-gray-500 text-center">After submission, a booking cannot be edited. Bookings are automatically removed after the event date has ended.</p>
+                    <!-- Honeypot field to reduce automated spam. Leave this empty. -->
+                    <div class="hidden" aria-hidden="true"><label for="booking-website">Website</label><input type="text" id="booking-website" name="website" tabindex="-1" autocomplete="off"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
@@ -343,6 +385,7 @@
                 <a href="#about" class="text-gray-400 hover:text-white transition duration-300">About</a>
                 <a href="#connect" class="text-gray-400 hover:text-white transition duration-300">Connect</a>
                 <a href="#contact" class="text-gray-400 hover:text-white transition duration-300">Contact</a>
+                <a href="#booking" class="text-gray-400 hover:text-white transition duration-300">Book Now</a>
             </div>
         </div>
     </footer>
@@ -538,6 +581,99 @@
         });
 
     </script>
+
+    <!-- Booking integration. Set the two Supabase values using SETUP-INSTRUCTIONS.txt. -->
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+        const SUPABASE_URL = 'PASTE_YOUR_SUPABASE_PROJECT_URL_HERE';
+        const SUPABASE_ANON_KEY = 'PASTE_YOUR_SUPABASE_ANON_PUBLIC_KEY_HERE';
+        const bookingForm = document.getElementById('booking-form');
+        const bookingDate = document.getElementById('booking-date');
+        const bookingStatus = document.getElementById('booking-status');
+        const bookingSubmit = document.getElementById('booking-submit');
+
+        // Use Kenya local date for the minimum selectable event date.
+        const kenyaToday = new Intl.DateTimeFormat('en-CA', {
+            timeZone: 'Africa/Nairobi', year: 'numeric', month: '2-digit', day: '2-digit'
+        }).format(new Date());
+        bookingDate.min = kenyaToday;
+
+        const supabaseConfigured =
+            SUPABASE_URL.startsWith('https://') &&
+            !SUPABASE_URL.includes('https://ijotjgxnymynkdnnfxtw.supabase.co') &&
+            !SUPABASE_ANON_KEY.includes('sb_publishable_lsOBkoveWr8BRePsEzN5Pw_8L8Ok4xK');
+
+        if (!supabaseConfigured) {
+            bookingStatus.textContent = 'Booking setup is not complete yet. Please contact KSN Media Co. directly.';
+            bookingStatus.className = 'text-center text-sm text-amber-700';
+        }
+
+        bookingForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            if (!supabaseConfigured) return;
+
+            // Honeypot: silently reject likely bot submissions.
+            if (document.getElementById('booking-website').value.trim() !== '') return;
+
+            const formData = new FormData(bookingForm);
+            const eventDate = String(formData.get('event_date') || '');
+            const venue = String(formData.get('venue') || '').trim();
+            const clientName = String(formData.get('client_name') || '').trim();
+            const phone = String(formData.get('phone') || '').trim();
+            const email = String(formData.get('email') || '').trim();
+
+            if (!eventDate || !venue || !clientName || !phone) {
+                bookingStatus.textContent = 'Please complete all required fields.';
+                bookingStatus.className = 'text-center text-sm text-red-600';
+                return;
+            }
+            if (eventDate < kenyaToday) {
+                bookingStatus.textContent = 'Please choose today or a future event date.';
+                bookingStatus.className = 'text-center text-sm text-red-600';
+                return;
+            }
+
+            bookingSubmit.disabled = true;
+            bookingSubmit.textContent = 'Submitting...';
+            bookingStatus.textContent = '';
+            const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+            try {
+                const { error } = await supabase.from('bookings').insert({
+                    event_date: eventDate,
+                    venue,
+                    client_name: clientName,
+                    phone,
+                    email: email || null
+                });
+
+                if (error) {
+                    if (error.code === '23505') {
+                        bookingStatus.textContent = 'That venue is already booked for this date. Please choose another date or venue.';
+                    } else {
+                        console.error('Booking submission error:', error);
+                        bookingStatus.textContent = 'We could not submit your booking. Please try again or contact us directly.';
+                    }
+                    bookingStatus.className = 'text-center text-sm text-red-600';
+                    return;
+                }
+
+                bookingForm.reset();
+                bookingDate.min = kenyaToday;
+                bookingStatus.textContent = 'Your booking has been submitted successfully. It cannot be edited after submission.';
+                bookingStatus.className = 'text-center text-sm text-green-700';
+            } catch (error) {
+                console.error('Booking connection error:', error);
+                bookingStatus.textContent = 'Connection problem. Please check your internet and try again.';
+                bookingStatus.className = 'text-center text-sm text-red-600';
+            } finally {
+                bookingSubmit.disabled = false;
+                bookingSubmit.textContent = 'Submit Booking';
+            }
+        });
+    </script>
+
 </body>
 </html>
 
